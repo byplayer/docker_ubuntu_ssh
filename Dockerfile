@@ -4,9 +4,11 @@ MAINTAINER YUKIO GOTO byplayer
 
 ENV DEBIAN_FRONTEND noninteractive
 
-# RUN apt-get update && apt-get upgrade -y
+RUN echo "Asia/Singapore" > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
+
+RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y openssh-server supervisor
-RUN apt-get clean && rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/
+# RUN apt-get clean && rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/
 
 RUN mkdir -p /var/run/sshd
 RUN mkdir -p /var/log/supervisor
